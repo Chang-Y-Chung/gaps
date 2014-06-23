@@ -23,25 +23,15 @@ shinyServer(function(input, output) {
         data <- dataInput()
         p <- ggplot(data, aes(x=cohort, y=diff_pct, fill=grp2)) +
              geom_bar(position="dodge", stat="identity") +
-             scale_y_continuous(limits=c(-15, 15)) +
+             scale_y_continuous(limits=c(-20, 20)) +
              scale_x_continuous(limits=c(1960, 2010)) +
              scale_fill_manual(values = groupInput(),
                 labels=c("African", "Caribbean", "Latin American")) +
              guides(fill=guide_legend(title=NULL)) +
              xlab("Immigration Cohort") +
-             ylab("Difference in %") +
+             ylab("% Difference") +
              geom_hline(yintercept=0)
         print(p)
-    })
-
-    output$note <- renderUI({
-        p(paste("Notes: Each bar represents projected difference in",
-        "percentages in weekly earnings between native black (or native",
-        "black movers) and black immigrants with 20 or more years of",
-        "US residency. Immigrants are grouped by their origin:",
-        "English-speaking Afria, English-speaking Caribbean, and",
-        "Latin America. Immigration cohort of 1965 includes all",
-        "pre-1970 cohorts."), style="word-break:normal; font-size:90%")
     })
 
 })
